@@ -1,5 +1,5 @@
 /*==================================================
-Project:       	Reported COVID-19 cases in Africa
+Project:       	Reported COVID-19 deaths in Africa
 
 Output:			Figures showing the evolution of the pandemic in the Africa region 
 				(with a focus on sub-Saharan African countries)
@@ -46,7 +46,7 @@ Latest update: Sep 17, 2020
 	global projectfolder = "/Users/alexis_pro/Documents/GitHub/covid19_africa_deaths"
 	*global projectfolder = "here insert your own global path where you forked this repository or saved the data folders
 	
-	wbopendata, replace all
+	*wbopendata, replace all // run this line only once (the first time)
 	
 
 /*====================================================================================
@@ -152,7 +152,7 @@ Latest update: Sep 17, 2020
 
 
 /*====================================================================================
-              Chart 1: Reported COVID-19 cases by region
+              Chart 1: Reported COVID-19 deaths by region
 ==================================================================================*/
 
 
@@ -193,7 +193,7 @@ Latest update: Sep 17, 2020
 	scatter ln_deaths deaths_days if regionname == "Middle East and North Africa" & latest==1, mlab(regionname) mcolor("33 69 91") mlabcolor("33 69 91") mlabsize(vsmall) mlabpos(3) || ///
 	scatter ln_deaths deaths_days if regionname == "Latin America and Caribbean" & latest==1, mlab(regionname) mcolor("180 130 130") mlabcolor("180 130 130") mlabsize(vsmall) mlabpos(12) ///
 	tlab(0(10)240, labsize(vsmall)) xscale(range(0 290)) legend(off) graphregion(color(white)) bgcolor(white) ylab(2.3 "10" 4.6 "100" 6.9 "1K" 9.2 "10K" 11.51 "100K" 13.82 "1M", labsize(vsmall)) ///
-	ttitle("Days since first death reported in each region --->", size(small)) ytitle("Total reported cases (log scale)" " ", size(small)) ///
+	ttitle("Days since first death reported in each region --->", size(small)) ytitle("Total reported deaths (log scale)" " ", size(small)) ///
 	title("Reported deaths of COVID-19 in sub-Saharan Africa is following" "a similar trajectory to other regions, but with a delayed start." " ", size(medium) position(11) span) ///
 	note("{bf:Note}: Groups of countries by World Bank geographical region: sub-Saharan Africa (48), North America (2), Europe & Central Asia (49)," ///
 	"East Asia & Pacific (29), South Asia (8), Middle East & North Africa (21) and Latin America (26)." "The chart shows reported numbers. Limited testing in sub-Saharan African countries could result in underreporting." ///
@@ -209,7 +209,7 @@ Latest update: Sep 17, 2020
 	
 	
 /*====================================================================================
-              Chart 2: Reported COVID-19 cases per million people by region
+              Chart 2: Reported COVID-19 deaths per million people by region
 ==================================================================================*/
 
 
@@ -250,7 +250,7 @@ Latest update: Sep 17, 2020
 	scatter ln_deathspc deaths_days if regionname == "Middle East and North Africa" & latest==1, mlab(regionname) mcolor("33 69 91") mlabcolor("33 69 91") mlabsize(vsmall) mlabpos(3) || ///
 	scatter ln_deathspc deaths_days if regionname == "Latin America and Caribbean" & latest==1, mlab(regionname) mcolor("180 130 130") mlabcolor("180 130 130") mlabsize(vsmall) mlabpos(12) ///
 	tlab(0(10)240, labsize(vsmall)) xscale(range(0 290)) legend(off) graphregion(color(white)) bgcolor(white) ylab(-6.9 "0.001" -4.6 "0.01" -2.3 "0.1" 0 "1" 2.3 "10" 4.6 "100" 6.9 "1K", labsize(vsmall)) ///
-	ttitle("Days since first case reported in each region --->", size(small)) ytitle("Total reported cases per million people (log scale)" " ", size(small)) ///
+	ttitle("Days since first case reported in each region --->", size(small)) ytitle("Total reported deaths per million people (log scale)" " ", size(small)) ///
 	title("Reported cumulative COVID-19 related deaths per million people" "in sub-Saharan Africa are higher than East Asia & Pacific." " ", size(medium) position(11) span) ///
 	note("{bf:Note}: Groups of countries by World Bank geographical region: sub-Saharan Africa (48), North America (2), Europe & Central Asia (49)," ///
 	"East Asia & Pacific (29), South Asia (8), Middle East & North Africa (21) and Latin America (26)." "The chart shows reported numbers. Limited testing in sub-Saharan African countries could result in underreporting." ///
@@ -263,7 +263,7 @@ Latest update: Sep 17, 2020
 	
 	
 /*====================================================================================
-              Chart 3: Bar chart of COVID-19 cases by country
+              Chart 3: Bar chart of COVID-19 deaths by country
 ==================================================================================*/	
 	
 
@@ -282,7 +282,7 @@ Latest update: Sep 17, 2020
 	count if deaths >=5000
 	
 	graph hbar deaths if deaths!= . & deaths >= 100, over(country, sort(deaths) descending label(labsize(tiny))) blabel(total, size(tiny) format(%12.0fc)) bar(1, fcolor("33 69 91"))  ///
-	graphregion(color(white)) bgcolor(white) ytitle("Total reported cases") ylab(,labsize(small)) ylab(0 "0" 2e3 "2K" 4e3 "4K" 6e3 "6K" 8e3 "8K" 10e3 "10K" 12e3 "12K" 14e3 "14K" 16e3 "16K") ///
+	graphregion(color(white)) bgcolor(white) ytitle("Total reported deaths") ylab(,labsize(small)) ylab(0 "0" 2e3 "2K" 4e3 "4K" 6e3 "6K" 8e3 "8K" 10e3 "10K" 12e3 "12K" 14e3 "14K" 16e3 "16K") ///
 	title("South Africa has reported more deaths than all the deaths reported" "in the rest of sub-Saharan African countries." " ", size(medium) position(11) span) ///
 	note("{bf:Note}: Only displaying countries with more than 100 reported deaths. The chart shows reported numbers." "Limited testing in sub-Saharan African countries could result in underreporting." "{bf:Source}: own elaboration using CSSE at Johns Hopkins University data.  Accessed on $S_DATE {bf:CC BY}", size(vsmall) span)	
 	
@@ -292,7 +292,7 @@ Latest update: Sep 17, 2020
 	
 	
 /*====================================================================================
-              Chart 4: Reported cases line chart by country
+              Chart 4: Reported deaths line chart by country
 ==================================================================================*/												
 
 
@@ -426,7 +426,7 @@ Latest update: Sep 17, 2020
 	scatter ln_deaths deaths_days if iso3 == "ETH" & latest==1, mlab(deaths) mcolor("254 107 100") mlabcolor("254 107 100") mlabpos(1) mlabgap(*3) mlabsize(tiny) msize(vsmall) || ///
 	scatter ln_deaths deaths_days if iso3 == "KEN" & latest==1, mlab(deaths) mcolor("149 125 173") mlabcolor("149 125 173") mlabpos(3) mlabgap(*9) mlabsize(tiny) msize(vsmall) || ///
 	scatter ln_deaths deaths_days if iso3 == "SEN" & latest==1, mlab(deaths) mcolor("246 146 188") mlabcolor("246 146 188") mlabpos(9) mlabgap(*11) mlabsize(tiny) msize(vsmall) ///
-	ttitle("Days since first reported death by country --->", size(small)) ytitle("Total reported cases (log scale)", size(small)) ylab(2.3 "10" 4.6 "100" 6.9 "1K" 9.21 "10K" 11.51 "100K" 13.81 "1M", labsize(vsmall)) ///
+	ttitle("Days since first reported death by country --->", size(small)) ytitle("Total reported deaths (log scale)", size(small)) ylab(2.3 "10" 4.6 "100" 6.9 "1K" 9.21 "10K" 11.51 "100K" 13.81 "1M", labsize(vsmall)) ///
 	graphregion(color(white)) bgcolor(white) title("While some Sub-Saharan African countries continue reporting more COVID-19" "related deaths, many others continue reporting a relative low number of deaths.", position(11) span size(medium)) tlab(0(10)250, labsize(vsmall)) ///
 	note("{bf:Note}: Ten selected large sub-Saharan African countries are indicated by name. All remaining sub-Saharan African countries shown in grey." ///
 	"The chart shows reported numbers.  Limited testing in sub-Saharan African countries could result in underreporting." ///
@@ -441,7 +441,7 @@ Latest update: Sep 17, 2020
 		
 		
 /*====================================================================================
-              Chart 5: Chart showing daily COVID-19 cases in South Africa and the rest of Africa
+              Chart 5: Chart showing daily COVID-19 deaths in South Africa and the rest of Africa
 ==================================================================================*/
 	
 
@@ -493,7 +493,7 @@ Latest update: Sep 17, 2020
 
 
 /*====================================================================================
-              Chart 6: Chart showing daily COVID-19 cases in all regions in the world
+              Chart 6: Chart showing daily COVID-19 deaths in all regions in the world
 ==================================================================================*/	
 	
 	
